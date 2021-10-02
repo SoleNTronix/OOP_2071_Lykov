@@ -1,0 +1,4 @@
+git clone https://github.com/SoleNTronix/OOP_2071_Lykov.git
+git branch task_rational
+git checkout task_rational
+git add --all
