@@ -14,65 +14,86 @@ namespace Rational
     {
         public Form1()
         {
-            InitializeComponent();
-            
-
-
+            InitializeComponent();            
         }
 
         private void Sum_Click(object sender, EventArgs e)
         {
-            int text1 = Convert.ToInt32(top1.Text);
-            int text2 = Convert.ToInt32(bottom1.Text);
-            int text3 = Convert.ToInt32(top2.Text);
-            int text4 = Convert.ToInt32(bottom2.Text);
+            Fraction first = new Fraction();
+            Fraction second = new Fraction();
 
-            Rat result = new Rat();
-            result.Sum(text1, text3, text2, text4);
-            resultTop.Text = Convert.ToString(result.top);
-            resultBottom.Text = Convert.ToString(result.bottom);
+            bool check_num1 = int.TryParse(num1.Text, out first.numerator);
+            bool check_denum1 = int.TryParse(denum1.Text, out first.denumerator);
+            bool check_num2 = int.TryParse(num2.Text, out second.numerator);
+            bool check_denum2 = int.TryParse(denum2.Text, out second.denumerator);
+
+            if (!check_num1 || !check_num2 || !check_denum1 || !check_denum2)
+                MessageBox.Show("Ошибка ввода! Введите целое(ые) число(а)");
+            
+            Fraction result = new Fraction();
+            result.Sum(first, second);
+            resultNum.Text = Convert.ToString(result.numerator);
+            resultDenum.Text = Convert.ToString(result.denumerator);
             operation.Text = "+";
         }
 
         private void Dif_Click(object sender, EventArgs e)
         {
-            int text1 = Convert.ToInt32(top1.Text);
-            int text2 = Convert.ToInt32(bottom1.Text);
-            int text3 = Convert.ToInt32(top2.Text);
-            int text4 = Convert.ToInt32(bottom2.Text);
+            Fraction first = new Fraction();
+            Fraction second = new Fraction();
 
-            Rat result = new Rat();
-            result.Dif(text1, text3, text2, text4);
-            resultTop.Text = Convert.ToString(result.top);
-            resultBottom.Text = Convert.ToString(result.bottom);
+            bool check_num1 = int.TryParse(num1.Text, out first.numerator);
+            bool check_denum1 = int.TryParse(denum1.Text, out first.denumerator);
+            bool check_num2 = int.TryParse(num2.Text, out second.numerator);
+            bool check_denum2 = int.TryParse(denum2.Text, out second.denumerator);
+
+            if (!check_num1 || !check_num2 || !check_denum1 || !check_denum2)
+                MessageBox.Show("Ошибка ввода! Введите целое(ые) число(а)");
+
+            Fraction result = new Fraction();
+            result.Dif(first, second);
+            resultNum.Text = Convert.ToString(result.numerator);
+            resultDenum.Text = Convert.ToString(result.denumerator);
             operation.Text = "-";
         }
 
         private void Mult_Click(object sender, EventArgs e)
         {
-            int text1 = Convert.ToInt32(top1.Text);
-            int text2 = Convert.ToInt32(bottom1.Text);
-            int text3 = Convert.ToInt32(top2.Text);
-            int text4 = Convert.ToInt32(bottom2.Text);
+            Fraction first = new Fraction();
+            Fraction second = new Fraction();
 
-            Rat result = new Rat();
-            result.Mult(text1, text3, text2, text4);
-            resultTop.Text = Convert.ToString(result.top);
-            resultBottom.Text = Convert.ToString(result.bottom);
+            bool check_num1 = int.TryParse(num1.Text, out first.numerator);
+            bool check_denum1 = int.TryParse(denum1.Text, out first.denumerator);
+            bool check_num2 = int.TryParse(num2.Text, out second.numerator);
+            bool check_denum2 = int.TryParse(denum2.Text, out second.denumerator);
+
+            if (!check_num1 || !check_num2 || !check_denum1 || !check_denum2)
+                MessageBox.Show("Ошибка ввода! Введите целое(ые) число(а)");
+
+            Fraction result = new Fraction();
+            result.Mult(first, second);
+            resultNum.Text = Convert.ToString(result.numerator);
+            resultDenum.Text = Convert.ToString(result.denumerator);
             operation.Text = "*";
         }
 
         private void Div_Click(object sender, EventArgs e)
         {
-            int text1 = Convert.ToInt32(top1.Text);
-            int text2 = Convert.ToInt32(bottom1.Text);
-            int text3 = Convert.ToInt32(top2.Text);
-            int text4 = Convert.ToInt32(bottom2.Text);
+            Fraction first = new Fraction();
+            Fraction second = new Fraction();
 
-            Rat result = new Rat();
-            result.Div(text1, text3, text2, text4);
-            resultTop.Text = Convert.ToString(result.top);
-            resultBottom.Text = Convert.ToString(result.bottom);
+            bool check_num1 = int.TryParse(num1.Text, out first.numerator);
+            bool check_denum1 = int.TryParse(denum1.Text, out first.denumerator);
+            bool check_num2 = int.TryParse(num2.Text, out second.numerator);
+            bool check_denum2 = int.TryParse(denum2.Text, out second.denumerator);
+
+            if (!check_num1 || !check_num2 || !check_denum1 || !check_denum2)
+                MessageBox.Show("Ошибка ввода! Введите целое(ые) число(а)");
+
+            Fraction result = new Fraction();
+            result.Div(first, second);
+            resultNum.Text = Convert.ToString(result.numerator);
+            resultDenum.Text = Convert.ToString(result.denumerator);
             operation.Text = "/";
         }
     }
