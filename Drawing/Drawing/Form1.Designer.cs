@@ -47,7 +47,9 @@ namespace Drawing
             this.gbWagon = new System.Windows.Forms.GroupBox();
             this.B_clear = new System.Windows.Forms.Button();
             this.bWD = new System.Windows.Forms.Button();
-            this.cB_move = new System.Windows.Forms.CheckBox();
+            this.rbTrain = new System.Windows.Forms.RadioButton();
+            this.wgCnt = new System.Windows.Forms.TextBox();
+            this.labelT = new System.Windows.Forms.Label();
             this.gbWagon.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,14 +92,14 @@ namespace Drawing
             // 
             this.rect_w.Location = new System.Drawing.Point(680, 32);
             this.rect_w.Name = "rect_w";
-            this.rect_w.Size = new System.Drawing.Size(167, 27);
+            this.rect_w.Size = new System.Drawing.Size(182, 27);
             this.rect_w.TabIndex = 4;
             // 
             // label_w
             // 
             this.label_w.AutoSize = true;
             this.label_w.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label_w.Location = new System.Drawing.Point(704, 9);
+            this.label_w.Location = new System.Drawing.Point(717, 9);
             this.label_w.Name = "label_w";
             this.label_w.Size = new System.Drawing.Size(116, 20);
             this.label_w.TabIndex = 5;
@@ -107,7 +109,7 @@ namespace Drawing
             // 
             this.label_h.AutoSize = true;
             this.label_h.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label_h.Location = new System.Drawing.Point(704, 64);
+            this.label_h.Location = new System.Drawing.Point(717, 64);
             this.label_h.Name = "label_h";
             this.label_h.Size = new System.Drawing.Size(121, 20);
             this.label_h.TabIndex = 7;
@@ -117,21 +119,21 @@ namespace Drawing
             // 
             this.rect_h.Location = new System.Drawing.Point(679, 87);
             this.rect_h.Name = "rect_h";
-            this.rect_h.Size = new System.Drawing.Size(168, 27);
+            this.rect_h.Size = new System.Drawing.Size(183, 27);
             this.rect_h.TabIndex = 6;
             // 
             // circ_r
             // 
             this.circ_r.Location = new System.Drawing.Point(679, 137);
             this.circ_r.Name = "circ_r";
-            this.circ_r.Size = new System.Drawing.Size(168, 27);
+            this.circ_r.Size = new System.Drawing.Size(183, 27);
             this.circ_r.TabIndex = 8;
             // 
             // label_r
             // 
             this.label_r.AutoSize = true;
             this.label_r.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label_r.Location = new System.Drawing.Point(717, 114);
+            this.label_r.Location = new System.Drawing.Point(730, 114);
             this.label_r.Name = "label_r";
             this.label_r.Size = new System.Drawing.Size(90, 20);
             this.label_r.TabIndex = 9;
@@ -153,7 +155,7 @@ namespace Drawing
             // 
             this.label_s.AutoSize = true;
             this.label_s.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label_s.Location = new System.Drawing.Point(717, 167);
+            this.label_s.Location = new System.Drawing.Point(730, 167);
             this.label_s.Name = "label_s";
             this.label_s.Size = new System.Drawing.Size(85, 20);
             this.label_s.TabIndex = 11;
@@ -163,7 +165,7 @@ namespace Drawing
             // 
             this.wag_s.Location = new System.Drawing.Point(680, 190);
             this.wag_s.Name = "wag_s";
-            this.wag_s.Size = new System.Drawing.Size(167, 27);
+            this.wag_s.Size = new System.Drawing.Size(182, 27);
             this.wag_s.TabIndex = 12;
             // 
             // rbWagonE
@@ -210,7 +212,7 @@ namespace Drawing
             this.gbWagon.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.gbWagon.Location = new System.Drawing.Point(694, 315);
             this.gbWagon.Name = "gbWagon";
-            this.gbWagon.Size = new System.Drawing.Size(153, 124);
+            this.gbWagon.Size = new System.Drawing.Size(168, 124);
             this.gbWagon.TabIndex = 16;
             this.gbWagon.TabStop = false;
             this.gbWagon.Text = "Wagon type";
@@ -219,7 +221,7 @@ namespace Drawing
             // 
             this.B_clear.Location = new System.Drawing.Point(680, 499);
             this.B_clear.Name = "B_clear";
-            this.B_clear.Size = new System.Drawing.Size(167, 29);
+            this.B_clear.Size = new System.Drawing.Size(182, 29);
             this.B_clear.TabIndex = 17;
             this.B_clear.Text = "Clear";
             this.B_clear.UseVisualStyleBackColor = true;
@@ -233,25 +235,46 @@ namespace Drawing
             this.bWD.TabIndex = 18;
             this.bWD.Text = "Write Data";
             this.bWD.UseVisualStyleBackColor = true;
+            this.bWD.Click += new System.EventHandler(this.bWD_Click);
             // 
-            // cB_move
+            // rbTrain
             // 
-            this.cB_move.AutoSize = true;
-            this.cB_move.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.cB_move.Location = new System.Drawing.Point(680, 457);
-            this.cB_move.Name = "cB_move";
-            this.cB_move.Size = new System.Drawing.Size(68, 24);
-            this.cB_move.TabIndex = 19;
-            this.cB_move.Text = "Move";
-            this.cB_move.UseVisualStyleBackColor = true;
+            this.rbTrain.AutoSize = true;
+            this.rbTrain.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.rbTrain.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.rbTrain.Location = new System.Drawing.Point(679, 466);
+            this.rbTrain.Name = "rbTrain";
+            this.rbTrain.Size = new System.Drawing.Size(62, 24);
+            this.rbTrain.TabIndex = 19;
+            this.rbTrain.Text = "Train";
+            this.rbTrain.UseVisualStyleBackColor = false;
+            // 
+            // wgCnt
+            // 
+            this.wgCnt.Location = new System.Drawing.Point(748, 466);
+            this.wgCnt.Name = "wgCnt";
+            this.wgCnt.Size = new System.Drawing.Size(114, 27);
+            this.wgCnt.TabIndex = 20;
+            // 
+            // labelT
+            // 
+            this.labelT.AutoSize = true;
+            this.labelT.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.labelT.Location = new System.Drawing.Point(748, 443);
+            this.labelT.Name = "labelT";
+            this.labelT.Size = new System.Drawing.Size(114, 20);
+            this.labelT.TabIndex = 21;
+            this.labelT.Text = "Wagon quantity";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(857, 540);
-            this.Controls.Add(this.cB_move);
+            this.ClientSize = new System.Drawing.Size(871, 541);
+            this.Controls.Add(this.labelT);
+            this.Controls.Add(this.wgCnt);
+            this.Controls.Add(this.rbTrain);
             this.Controls.Add(this.bWD);
             this.Controls.Add(this.B_clear);
             this.Controls.Add(this.gbWagon);
@@ -297,7 +320,9 @@ namespace Drawing
         private System.Windows.Forms.GroupBox gbWagon;
         private System.Windows.Forms.Button B_clear;
         private System.Windows.Forms.Button bWD;
-        private System.Windows.Forms.CheckBox cB_move;
+        private System.Windows.Forms.RadioButton rbTrain;
+        private System.Windows.Forms.TextBox wgCnt;
+        private System.Windows.Forms.Label labelT;
     }
 }
 

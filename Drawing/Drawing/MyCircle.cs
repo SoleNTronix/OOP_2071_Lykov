@@ -16,11 +16,19 @@ namespace Drawing
         }
         public override bool isPointInside(int point_x, int point_y)
         {
-            if (Math.Pow(point_x-x,2) + Math.Pow(point_y - y, 2) <= Math.Pow(rad,2))
+            if ((Math.Pow(point_x-x - rad,2) + Math.Pow(point_y - y - rad, 2)) <= Math.Pow(rad,2))
             {
                 isInside = true;                
             }
             return isInside;
+        }
+
+        public override void Move(Point point1, Point point2)
+        {
+            int difX = point2.X - point1.X;
+            int difY = point2.Y - point1.Y;
+            x += difX;
+            y += difY;
         }
     }
 

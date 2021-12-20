@@ -15,12 +15,15 @@ namespace Drawing
         FiguresContainer container = new FiguresContainer();
         Graphics gr;
         Point StartPoint;
-        int num_move = 0;
         public Form1()
         {
             InitializeComponent();
-            gr = panel1.CreateGraphics();/*
-            container.FromXml(""); дописать путь к файлу!*/
+            gr = panel1.CreateGraphics();
+            container.FromXml("Data.xml");
+            foreach (Figure figure in container.objects)
+            {
+                figure.Draw(gr);
+            }
         }
 
         
@@ -76,7 +79,7 @@ namespace Drawing
 
                         wagonE.x = e.X;
                         wagonE.y = e.Y;
-                        wagonE.type = "Wag";
+                        wagonE.type = "WagE";
                         if (wag_s.Text == "")
                         {
                             wag_s.Text = "300";
@@ -92,7 +95,7 @@ namespace Drawing
 
                         wagonC.x = e.X;
                         wagonC.y = e.Y;
-                        wagonC.type = "Wag";
+                        wagonC.type = "WagC";
                         if (wag_s.Text == "")
                         {
                             wag_s.Text = "300";
@@ -108,7 +111,7 @@ namespace Drawing
 
                         wagonS.x = e.X;
                         wagonS.y = e.Y;
-                        wagonS.type = "Wag";
+                        wagonS.type = "WagS";
                         if (wag_s.Text == "")
                         {
                             wag_s.Text = "300";
@@ -118,37 +121,84 @@ namespace Drawing
                         wagonS.Draw(gr);
                         container.objects.Add(wagonS);
                     }
+                    
                 }
-                Invalidate();
+                else if (rbTrain.Checked)
+                {
+                    Train train = new Train();
+
+                    train.x = e.X;
+                    train.y = e.Y;
+                    train.type = "Train";
+                    if (wag_s.Text == "")
+                    {
+                        wag_s.Text = "150";
+                    }
+                    if (wgCnt.Text == "")
+                    {
+                        wgCnt.Text = "3";
+                    }
+                    train.size = Convert.ToInt32(wag_s.Text);
+                    train.wagons = Convert.ToInt32(wgCnt.Text);
+                    train.Draw(gr);
+                    container.objects.Add(train);
+                }
+
             }
+
+            if(e.Button == MouseButtons.Middle)
+            {
+                foreach(Figure figure in container.objects)
+                {
+                    if (figure.isPointInside(e.X, e.Y))
+                    {
+                        container.objects.Remove(figure);
+                        break;
+                    }
+                }
+                panel1.Refresh();
+                foreach (Figure figure in container.objects)
+                {
+                    figure.Draw(gr);
+                }
+            }
+
             if (e.Button == MouseButtons.Right)
             {                
                 foreach (Figure figure in container.objects)
                 {
                     if(figure.isPointInside(e.X, e.Y))
                     {
-                        StartPoint = figure.GetStartPos(e.Location);
+                        moveFigure = figure;
+                        StartPoint = e.Location;
                         break;
                     }
-                    num_move++;
                 }                
             }
+            Invalidate();            
         }
-
+        Figure moveFigure = null;
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right && container.objects[num_move].isInside)
+            if (e.Button == MouseButtons.Right && moveFigure != null)
             {
-                container.objects[num_move].Move(StartPoint, e.Location);
-                container.objects[num_move].isInside = false;
-                num_move = 0;
-                panel1.Invalidate();
+                Point end = new Point();
+                end.X = e.X - StartPoint.X;
+                end.Y = e.Y - StartPoint.Y;
+                moveFigure.Move(StartPoint, e.Location);
+                moveFigure.isInside = false;
+                panel1.Refresh();
                 foreach (Figure figure in container.objects)
                 {
                     figure.Draw(gr);
                 }
+                moveFigure = null;
             }
-            
+        }
+
+        private void bWD_Click(object sender, EventArgs e)
+        {
+            container.ToXml("Data.xml");
         }
     }
 }

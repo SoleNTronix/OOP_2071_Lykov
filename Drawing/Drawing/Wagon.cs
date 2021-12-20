@@ -15,9 +15,6 @@ namespace Drawing
         MyCircle rightWheel = new MyCircle();
         public override void Draw(Graphics gr)
         {
-            //gr.DrawRectangle(new Pen(Color.Black), x, y, size, size / 2);
-            //gr.DrawEllipse(new Pen(Color.Black), x + size / 10, y + size / 2, size / 5, size / 5);
-            //gr.DrawEllipse(new Pen(Color.Black), size + x / 3 - size / 10, y + size / 2, size / 5, size / 5);
             body.x = this.x;
             body.y = this.y;
             body.width = this.size;
@@ -34,6 +31,7 @@ namespace Drawing
             rightWheel.y = this.y + size / 2;
             rightWheel.Draw(gr);
         }
+
         public override bool isPointInside(int point_x, int point_y)
         {
             bool isInside = false;
@@ -42,6 +40,13 @@ namespace Drawing
                 isInside = true;
             }
             return isInside;
+        }
+        public override void Move(Point point1, Point point2)
+        {
+            int difX = point2.X - point1.X;
+            int difY = point2.Y - point1.Y;
+            x += difX;
+            y += difY;
         }
     }
 }

@@ -30,14 +30,11 @@ namespace Drawing
             }
             return isInside;
         }
-        public override Point GetStartPos(Point start)
-        {
-            return base.GetStartPos(start);
-        }
+        
         public override void Move(Point point1, Point point2)
         {
             int difX = point2.X - point1.X;
-            int difY = point2.Y- point1.Y;
+            int difY = point2.Y - point1.Y;
             x += difX;
             y += difY;
         }
