@@ -11,7 +11,7 @@ namespace Drawing
     class FiguresContainer
     {
         public List<Figure> objects = new List<Figure>();
-        public void ToXml(string filename)
+        public void ToXml(string filename) //Ошибка
         {
             XmlWriter writer = XmlWriter.Create(filename);
             writer.WriteStartDocument();

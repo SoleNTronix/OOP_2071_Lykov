@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
+
 namespace Drawing
 {   
     class Train: Wagon
     {
-        Wagon body = new Wagon();       
+        private const int spaceBetween = 2;
+        Wagon trainHead = new Wagon();
+        MyRectangle pipe = new MyRectangle();
         public int wagons;
+        enum RndWagon
+        {
+            Empty,
+            Coal,
+            Sand
+        }
         public int GetRndWagon()
         {
             Random rnd = new Random();
@@ -19,31 +28,24 @@ namespace Drawing
         }
         public void DrawTrainHead(Graphics gr)
         {            
-            MyRectangle pipe = new MyRectangle();
-            MyRectangle pipeEnd = new MyRectangle();
-            body.x = x;
-            body.y = y;
-            body.size = size;
-            body.Draw(gr);
-            pipe.height = size/3;
-            pipe.width = size/5;
-            pipe.x = body.x + body.size / 7;
-            pipe.y = body.y-pipe.height;
+            trainHead.x = x;
+            trainHead.y = y;
+            trainHead.size = size;
+            trainHead.Draw(gr);
+            pipe.height = size / 3;
+            pipe.width = size / 5;
+            pipe.x = trainHead.x + trainHead.size / 7;
+            pipe.y = trainHead.y - pipe.height;
             pipe.Draw(gr);
-            pipeEnd.height = size/4;
-            pipeEnd.width = size/4;
-            pipeEnd.x = body.x;
-            pipeEnd.y = body.y - pipe.height;
         }
         public override void Draw(Graphics gr)
         {
             Point prevLocation = new Point();
-            prevLocation.X = x + size + 2;
-            prevLocation.Y = body.y;
+            prevLocation.X = x + size + spaceBetween;
             DrawTrainHead(gr);
             for (int i = 0; i < wagons; i++)
-            {                
-                if (GetRndWagon() == 1)
+            {            
+                if (GetRndWagon() == Convert.ToInt32(RndWagon.Empty))
                 {
                     Wagon wagonE = new Wagon();
                     wagonE.x = prevLocation.X;
@@ -51,23 +53,23 @@ namespace Drawing
                     wagonE.size = size;
                     wagonE.Draw(gr);
                 }
-                if(GetRndWagon() == 2)
+                else if(GetRndWagon() == Convert.ToInt32(RndWagon.Coal))
                 {
-                    Wagon wagonC = new Wagon();
+                    WagonWithCoal wagonC = new WagonWithCoal();
                     wagonC.x = prevLocation.X;
                     wagonC.y = y;
                     wagonC.size = size;
                     wagonC.Draw(gr);
                 }
-                if(GetRndWagon() == 3)
+                else if(GetRndWagon() == Convert.ToInt32(RndWagon.Sand))
                 {
-                    Wagon wagonS = new Wagon();
+                    WagonWithSand wagonS = new WagonWithSand();
                     wagonS.x = prevLocation.X;
                     wagonS.y = y;
                     wagonS.size = size;
                     wagonS.Draw(gr);
                 }
-                prevLocation.X += size;
+                prevLocation.X += size + spaceBetween;
             }
         }
 
@@ -78,6 +80,15 @@ namespace Drawing
             int difY = point2.Y - point1.Y;
             x += difX;
             y += difY;
+        }
+        public override bool isPointInside(int point_x, int point_y)
+        {
+            bool pointIsInside = false;
+            if (trainHead.isPointInside(point_x, point_y) || pipe.isPointInside(point_x, point_y))
+            {
+                pointIsInside = true;
+            }
+            return pointIsInside;
         }
 
     }
