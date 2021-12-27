@@ -14,17 +14,24 @@ namespace Drawing
         Wagon trainHead = new Wagon();
         MyRectangle pipe = new MyRectangle();
         public int wagons;
+        public int[] rndwag;    
         enum RndWagon
         {
             Empty,
             Coal,
             Sand
         }
-        public int GetRndWagon()
+        public int[] GetRndWagon()
         {
-            Random rnd = new Random();
-            int wag_num = rnd.Next(1, 3);
-            return wag_num;
+            int[] rndwagtypes = new int[wagons];            
+            
+            for (int i = 0; i < wagons; i++)
+            {
+                Random rnd = new Random();
+                int wag_num = rnd.Next(0, 3);
+                rndwagtypes[i] = wag_num;
+            }
+            return rndwagtypes;
         }
         public void DrawTrainHead(Graphics gr)
         {            
@@ -44,8 +51,8 @@ namespace Drawing
             prevLocation.X = x + size + spaceBetween;
             DrawTrainHead(gr);
             for (int i = 0; i < wagons; i++)
-            {            
-                if (GetRndWagon() == Convert.ToInt32(RndWagon.Empty))
+            {                
+                if (rndwag[i] == Convert.ToInt32(RndWagon.Empty))
                 {
                     Wagon wagonE = new Wagon();
                     wagonE.x = prevLocation.X;
@@ -53,7 +60,7 @@ namespace Drawing
                     wagonE.size = size;
                     wagonE.Draw(gr);
                 }
-                else if(GetRndWagon() == Convert.ToInt32(RndWagon.Coal))
+                else if(rndwag[i] == Convert.ToInt32(RndWagon.Coal))
                 {
                     WagonWithCoal wagonC = new WagonWithCoal();
                     wagonC.x = prevLocation.X;
@@ -61,7 +68,7 @@ namespace Drawing
                     wagonC.size = size;
                     wagonC.Draw(gr);
                 }
-                else if(GetRndWagon() == Convert.ToInt32(RndWagon.Sand))
+                else if(rndwag[i] == Convert.ToInt32(RndWagon.Sand))
                 {
                     WagonWithSand wagonS = new WagonWithSand();
                     wagonS.x = prevLocation.X;

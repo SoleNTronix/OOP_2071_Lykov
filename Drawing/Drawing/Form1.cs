@@ -126,7 +126,12 @@ namespace Drawing
                 else if (rbTrain.Checked)
                 {
                     Train train = new Train();
-
+                    if (wgCnt.Text == "")
+                    {
+                        wgCnt.Text = "3";
+                    }
+                    train.wagons = Convert.ToInt32(wgCnt.Text);
+                    train.rndwag = train.GetRndWagon();
                     train.x = e.X;
                     train.y = e.Y;
                     train.type = "Train";
@@ -134,12 +139,8 @@ namespace Drawing
                     {
                         wag_s.Text = "150";
                     }
-                    if (wgCnt.Text == "")
-                    {
-                        wgCnt.Text = "3";
-                    }
+                    
                     train.size = Convert.ToInt32(wag_s.Text);
-                    train.wagons = Convert.ToInt32(wgCnt.Text);
                     train.Draw(gr);
                     container.objects.Add(train);
                 }
